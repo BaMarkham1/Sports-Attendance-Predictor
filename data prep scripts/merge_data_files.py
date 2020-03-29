@@ -39,4 +39,4 @@ def remove_blanks(df):
 merged_table = merge_data(probowl_count, team_record, attendance)
 next_year_df = get_diff_season_stats(merged_table, ["attend%", "attendance"], 1)
 next_year_df = remove_blanks(next_year_df)
-next_year_df.to_csv("csvs/next_season.csv")
+next_year_df.to_csv("csvs/full_dataset.csv")

@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Mar 28 13:14:56 2020
+
+@author: lemar
+"""
+
+import pandas as pd
+
+attendance = pd.read_csv("Attendance Data - Sheet1.csv")
+print(attendance)

@@ -92,4 +92,4 @@ def clean_data(main_table):
 table = get_data()
 table = numericalize_data(table)
 table = clean_data(table)
-table.to_csv("csvs/team_record_data.csv")
+table.to_csv("../csvs/team_record_data.csv")

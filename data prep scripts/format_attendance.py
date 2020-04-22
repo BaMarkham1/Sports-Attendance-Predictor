@@ -42,7 +42,7 @@ attendance_dict = {
         "Cincinnati" : "cin"
         }
 
-def convert_attendance_names(attendance_dict, df):
+def convert_names(attendance_dict, df):
     for index, row in df.iterrows():
         df.at[index, "Team Name"] = attendance_dict[df.at[index, "Team Name"]]
     return df
@@ -54,11 +54,16 @@ def get_capacitance(attendance):
         attendance.at[index, "capacity"] = float(attendance.at[index, "Average"]) / float(attendance.at[index, "attend%"])
     return attendance
         
-attendance = pd.read_csv("csvs/Attendance Data - Sheet1.csv")
+attendance = pd.read_csv("../csvs/Attendance Data - Sheet1.csv")
 attendance = attendance[attendance["Percentage"] != "-"]
-attendance = convert_attendance_names(attendance_dict, attendance)
+attendance = convert_names(attendance_dict, attendance)
 attendance = get_capacitance(attendance)
 attendance = attendance[["Year", "Team Name", "Average", "capacity", "attend%"]].copy()
 attendance.columns = ["year", "team", "attendance", "capacity", "attend%"]
-attendance = attendance.set_index(["year", "team"])
-attendance.to_csv("csvs/attendance_data.csv")
+
+
+weather = pd.read_csv("../csvs/weather_categories.csv")
+weather = convert_names(attendance_dict, weather)
+attendance = pd.merge(attendance, weather, how="left", left_on="team" , right_on="Team Name")
+attendance.drop("Team Name", axis=1, inplace=True)
+attendance.to_csv("../csvs/attendance_weather_data.csv", index=False)

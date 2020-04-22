@@ -9,9 +9,9 @@ import numpy as np
 
 
 
-probowl_count = pd.read_csv("csvs/probowl_data.csv", index_col=["year", "team"])
-team_record = pd.read_csv("csvs/team_record_data.csv", index_col=["year", "team"])
-attendance = pd.read_csv("csvs/attendance_data.csv", index_col=["year", "team"])
+probowl_count = pd.read_csv("../csvs/probowl_data.csv", index_col=["year", "team"])
+team_record = pd.read_csv("../csvs/team_record_data.csv", index_col=["year", "team"])
+attendance = pd.read_csv("../csvs/attendance_weather_data.csv", index_col=["year", "team"])
 
 def merge_data(probowl_count, team_record, attendance):
     merged_table = pd.merge(probowl_count, team_record, how="left", left_index = True ,right_index=True)
@@ -31,12 +31,7 @@ def remove_blanks(df):
     df = df.dropna()
     return df
     
-           
-
-
-    
-
 merged_table = merge_data(probowl_count, team_record, attendance)
 next_year_df = get_diff_season_stats(merged_table, ["attend%", "attendance"], 1)
 next_year_df = remove_blanks(next_year_df)
-next_year_df.to_csv("csvs/full_dataset.csv")
+next_year_df.to_csv("../csvs/full_dataset.csv")

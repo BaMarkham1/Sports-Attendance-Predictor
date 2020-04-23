@@ -6,5 +6,5 @@ save_non_project_files = False
 
 [main]
 version = 0.2.0
-recent_files = ['data prep scripts\\merge_data_files.py', 'data prep scripts\\advanced_linear_regression.py']
+recent_files = []
 
